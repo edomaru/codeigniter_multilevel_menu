@@ -15,7 +15,8 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
 
 ## How to use
 
-1. Configure the table fields of table if necessary in `application/config/multi_menu.php`:    
+1. Configure the table fields of table if necessary in `application/config/multi_menu.php`:  
+  
    ```php
     <?php
     $config["menu_id"]               = 'id';
@@ -26,6 +27,7 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
     $config["menu_order"]            = 'order';
     ?>
    ```
+
 2. In `application/config/multi_menu.php`, you can also configure menu structure if necessary:
    ```php
     <?php
@@ -40,6 +42,7 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
    ```
 
 3. Load the library manually or definied in `application/config/autoload.php`, execute query, pass result array data, and you ready to render the menu. See example below:
+
    ```php
     <?php
     // execute query and get array data
@@ -53,3 +56,6 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
     echo $this->multi_menu->render();
     ?>
    ```
+
+## Screenshoot
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot 1")
