@@ -2,9 +2,10 @@
 
 $config["menu_id"]               = 'id';
 $config["menu_label"]            = 'name';
-$config["menu_key"]              = 'key';
+$config["menu_key"]              = 'slug';
 $config["menu_parent"]           = 'parent';
 $config["menu_children"]         = 'children';
+$config["menu_order"]            = 'number';
 
 $config["full_tag_open"]         = '<ul>';
 $config["full_tag_close"]        = '</ul>';	

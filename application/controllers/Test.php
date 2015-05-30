@@ -2,11 +2,13 @@
 
 class Test extends CI_Controller {
 
-	public function index($parent=1)
+	public function index($parent = null)
 	{
-		$this->load->model("Menu_model", "menu");
-		$items = $this->menu->generate(5, $parent);
-		die('done');
+		$this->load->model("menu_model", "menu");
+		$items = $this->menu->all();
+
+		$this->load->library("multi_menu");
+		$this->load->view("test_view", compact('items'));
 	}
 
 

@@ -8,6 +8,7 @@
  * @subpackage		Libraries
  * @category		Libraries
  * @author			Eding Muhamad Saprudin 
+ * @link    		https://github.com/edomaru/codeigniter_multilevel_menu
  */
 class Multi_menu {
 
@@ -24,17 +25,30 @@ class Multi_menu {
 	private $menu_key          = 'key';
 	private $menu_parent       = 'parent';
 	private $menu_children     = 'children';
+	private $menu_order        = 'order';
 
 
+	/**
+	 * load configuration on config/multi_menu.php
+	 * 
+	 * @param array $config 
+	 */
 	public function __construct($config = array())
 	{
+		// just in case url helper has not load yet
 		$ci =& get_instance();
 		$ci->load->helper('url');
-		
+
 		$this->initialize($config);
 	}
 
-	public function initialize($config)
+	/**
+	 * Initialize multi level menu configuration
+	 * 
+	 * @param  array  $config multi level menu configuration
+	 * @return void         
+	 */
+	public function initialize($config = array())
 	{
 		foreach ($config as $key => $value) {
 			$this->$key = $value;
@@ -48,18 +62,24 @@ class Multi_menu {
      * @param  boolean $render      direct render or not, default is direct render     
      * @return string               html menu
      */
-    public function render($items, $active = "", $render = true)
+    public function render($items, $active = "")
     {
 		$html  = "";
-		$items = $this->prepare_items($items);
+		$items = $this->prepare_items($items);		
 
         $this->render_item($items, $active, $html);        
 
-        if ($render) echo $html;
-        else return $html;
+        return $html;
     } 
 
-    private function prepare_items($data = array())
+    /**
+     * Prepare item before render
+     * 
+     * @param  array 	$data   array data from active record result_array()
+     * @param  int 		$parent parent of items
+     * @return array         
+     */
+    private function prepare_items(array $data, $parent = null)
     {
     	$items = array();
 
@@ -72,9 +92,33 @@ class Multi_menu {
 			}	
 		}
 
+		// after items constructed
+		// sort array by order 
+		usort($items,array($this, 'sort_by_order'));
+
 		return $items;
     }
 
+    /**
+     * Sort array by order
+     * 
+     * @param  array $a the 1st array would be compared
+     * @param  array $b the 2nd array would be compared
+     * @return int
+     */
+    private function sort_by_order($a, $b)
+    {
+    	return $a[$this->menu_order] - $b[$this->menu_order];
+    }
+
+    /**
+     * Render data into menu items
+     * 
+     * @param  array $items  consructed data
+     * @param  string $active item which would be active
+     * @param  string &$html  html menu
+     * @return void         
+     */
     private function render_item($items, $active, &$html = '')
 	{	    
 	    $html .= empty($html) ? $this->first_tag_open : $this->full_tag_open; 
@@ -96,7 +140,7 @@ class Multi_menu {
 	        $html .= sprintf($anchor_item, $href, $label);
 	        
 	        if ( $has_children ) {
-	            render_item($item[$this->menu_children], $html);
+	            $this->render_item($item[$this->menu_children], $active, $html);
 	        }
 
 	        $html .= $this->item_tag_close; 
