@@ -17,8 +17,7 @@ class Multi_menu {
 	private $full_tag_close    = '</ul>';	
 	private $item_tag_open     = '<li>';
 	private $item_tag_close    = '</li>';
-	private $active_item_class = '<li class="active">';
-	private $active_item       = '';
+	private $active_item_class = '<li class="active">';	
 	private $anchor_item       = '<a href="%s">%s</a>';
 	private $menu_id           = 'id';
 	private $menu_label        = 'name';
@@ -58,19 +57,32 @@ class Multi_menu {
 	/**
      * Render the menu
      *
-     * @param  array  $items        array data
      * @param  boolean $render      direct render or not, default is direct render     
      * @return string               html menu
      */
-    public function render($items, $active = "")
+    public function render($active = "")
     {
 		$html  = "";
-		$items = $this->prepare_items($items);		
 
-        $this->render_item($items, $active, $html);        
+    	if ( count($this->items) ) 
+    	{
+			$items = $this->prepare_items($this->items);		
+
+	        $this->render_item($items, $active, $html);
+    	}
 
         return $html;
     } 
+
+    /**
+     * Set array data
+     * 
+     * @param array $items data which would be rendered
+     */
+    public function set_items($items = array())
+    {
+    	$this->items = $items;
+    }
 
     /**
      * Prepare item before render

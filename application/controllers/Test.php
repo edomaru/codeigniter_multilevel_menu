@@ -8,7 +8,9 @@ class Test extends CI_Controller {
 		$items = $this->menu->all();
 
 		$this->load->library("multi_menu");
-		$this->load->view("test_view", compact('items'));
+		$this->multi_menu->set_items($items);
+		
+		$this->load->view("test_view");
 	}
 
 
