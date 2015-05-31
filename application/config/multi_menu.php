@@ -13,6 +13,8 @@ $config["first_tag_open"]        = '<ul class="nav">';
 $config["item_tag_open"]         = '<li>';
 $config["item_tag_close"]        = '</li>';	
 $config["active_item_class"]     = '<li class="active">';
+$config["item_divider"]          = "<li class='divider'></li>";
+$config['divided_item_lists']	 = array();
 $config["anchor_item"]           = "<a href='%s'>%s</a>";
 // special anchor item:
 // $config['anchor_item_X'] = '<a href='%s'>%s</a>';

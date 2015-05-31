@@ -12,19 +12,22 @@
  */
 class Multi_menu {
 
-	private $first_tag_open    = '<ul class="nav">';
-	private $full_tag_open     = '<ul>';
-	private $full_tag_close    = '</ul>';	
-	private $item_tag_open     = '<li>';
-	private $item_tag_close    = '</li>';
-	private $active_item_class = '<li class="active">';	
-	private $anchor_item       = '<a href="%s">%s</a>';
-	private $menu_id           = 'id';
-	private $menu_label        = 'name';
-	private $menu_key          = 'key';
-	private $menu_parent       = 'parent';
-	private $menu_children     = 'children';
-	private $menu_order        = 'order';
+	private $first_tag_open           = '<ul class="nav">';
+	private $full_tag_open            = '<ul>';
+	private $full_tag_close           = '</ul>';	
+	private $item_tag_open            = '<li>';
+	private $item_tag_close           = '</li>';
+	private $active_item_class        = '<li class="active">';	
+	private $anchor_item              = '<a href="%s">%s</a>';
+	private $divided_items_list       = array();
+	private $divided_items_list_count = 0;
+	private $item_divider             = '';
+	private $menu_id                  = 'id';
+	private $menu_label               = 'name';
+	private $menu_key                 = 'key';
+	private $menu_parent              = 'parent';
+	private $menu_children            = 'children';
+	private $menu_order               = 'order';
 
 
 	/**
@@ -52,21 +55,40 @@ class Multi_menu {
 		foreach ($config as $key => $value) {
 			$this->$key = $value;
 		}
+
+		$this->divided_items_list_count = count($this->divided_items_list);
+	}
+
+	/**
+	 * Specify what items would be divided
+	 * 
+	 * @param array  $items   array of menu key
+	 * @param string $divider divider
+	 */
+	public function set_divided_items($items = array(), $divider = null)
+	{
+		$this->divided_items_list       = $items;
+		$this->item_divider             = $divider ? $divider : $this->item_divider;
+		$this->divided_items_list_count = count($this->divided_items_list);
 	}
 
 	/**
      * Render the menu
      *
-     * @param  boolean $render      direct render or not, default is direct render     
-     * @return string               html menu
+     * @param  boolean 	$render      			direct render or not, default is direct render  
+     * @param  array 	$divided_items_list 	menu items that would be divided   
+     * @param  string 	$divider 				divider item
+     * @return string               
      */
-    public function render($active = "")
+    public function render($active = "", $divided_items_list = array(), $divider = '')
     {
 		$html  = "";
 
     	if ( count($this->items) ) 
     	{
 			$items = $this->prepare_items($this->items);		
+
+			$this->set_divided_items($divided_items_list, $divider);
 
 	        $this->render_item($items, $active, $html);
     	}
@@ -142,9 +164,14 @@ class Multi_menu {
 	        // menu slug
 	        $slug  = $item[$this->menu_key];
 
+
 	        // has children or not
 	        $has_children = ! empty($item[$this->menu_children]);
 	        $href = $has_children ? '#' : site_url($slug);
+
+	        if ($this->divided_items_list_count > 0 && in_array($slug, $this->divided_items_list)) {
+	        	$html .= $this->item_divider;	
+	        }
 
 	        $html .= $active == $slug ? $this->active_item_class : $this->item_tag_open; 
 	        
