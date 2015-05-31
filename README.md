@@ -1,6 +1,6 @@
 # Codeigniter Multilevel Menu
 
-Codeigniter Multilevel Menu is a library that provide easy way to render multi level menu from active record `result_array()`. It's easy to use and customize
+Codeigniter Multilevel Menu is a library that provide easy way to render multi level menu from active record `result_array()`. It's easy to use and customize.
 
 
 ## Requirements
@@ -59,3 +59,8 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
 
 ## Screenshoot
 ![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot 1")
+
+
+### Next...
+
+Support bootstrap 3
