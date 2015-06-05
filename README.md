@@ -15,7 +15,7 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
 
 ## How to use
 
-1. Configure the table fields of table if necessary in `application/config/multi_menu.php`:  
+1. Configure the table fields if necessary in `application/config/multi_menu.php`:  
   
    ```php
     <?php
