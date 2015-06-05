@@ -85,6 +85,10 @@ class Multi_menu {
     {
 		$html  = "";
 
+		if ( is_array($active) ) {
+			$this->initialize($active);	
+		}
+
     	if ( count($this->items) ) 
     	{
 			$items = $this->prepare_items($this->items);		
