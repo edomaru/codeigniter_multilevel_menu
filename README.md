@@ -43,7 +43,14 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
     ?>
    ```
 
-3. By default, this library use several array keys for each items. `id` for menu id, `name` for menu label or menu caption, `slug` for menu key or slug, `parent` for menu parent and `order` for menu order. You can change according to the names of fields in your database table or as needed by defining in `application/config/multi_menu.php` as follow:  
+3. By default, this library use several array keys as follow: 
+   * `id` is id for menu item
+   * `name` for menu label or menu caption `<a href='#'>{name}</a>` 
+   * `key` for menu key or slug `<a href='http://example.com/{key}'>{name}</a>`
+   * `parent` for menu parent 
+   * `order` for menu order 
+   
+   You can change according to the names of fields in your database table or as needed by defining in `application/config/multi_menu.php` as follow:  
   
    ```php
     <?php

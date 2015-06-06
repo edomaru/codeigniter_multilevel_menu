@@ -342,58 +342,62 @@ class Multi_menu {
 	    foreach ($items as $item)
 	    {
 	        // menu label
-	        $label = $item[$this->menu_label];
-
-	        // menu slug
-	        $slug  = $item[$this->menu_key];
-
-	        // has children or not
-	        $has_children = ! empty($item['children']);	        
-
-	        // if menu item need separator 
-	        if ($this->divided_items_list_count > 0 && in_array($slug, $this->divided_items_list)) {
-	        	$html .= $this->item_divider;	
-	        }
-
-	        if ($has_children) 
+	        if ( isset($item[$this->menu_label], $item[$this->menu_key]) ) 
 	        {
-	        	if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_open != '' ) 
-	        	{
-					$tag_open    =  $this->parentl1_tag_open;
-					$item_anchor = $this->parentl1_anchor != '' ? $this->parentl1_anchor : $this->parent_anchor;
-	        	}
-	        	else 
-	        	{
-					$tag_open     = $this->parent_tag_open;
-					$item_anchor = $this->parent_anchor;
-	        	}
+		        $label = $item[$this->menu_label];
 
-				$href  = '#';				
-	        }
-	        else 
-	        {
-	        	$tag_open    = $this->item_tag_open;
-				$href        = site_url($slug);
-				$item_anchor = $this->item_anchor;
-	        }
+		        // menu slug
+		        $slug  = $item[$this->menu_key];
 
-			$html .= $this->set_active($tag_open, $slug);	        	        
+		        // has children or not
+		        $has_children = ! empty($item['children']);	        
 
-			$html .= sprintf($item_anchor, $href, $label);
+		        // if menu item need separator 
+		        if ($this->divided_items_list_count > 0 && in_array($slug, $this->divided_items_list)) {
+		        	$html .= $this->item_divider;	
+		        }
 
-	        if ( $has_children ) 
-	        {	        	
-	            $this->render_item($item['children'], $html);
+		        if ($has_children) 
+		        {
+		        	if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_open != '' ) 
+		        	{
+						$tag_open    =  $this->parentl1_tag_open;
+						$item_anchor = $this->parentl1_anchor != '' ? $this->parentl1_anchor : $this->parent_anchor;
+		        	}
+		        	else 
+		        	{
+						$tag_open     = $this->parent_tag_open;
+						$item_anchor = $this->parent_anchor;
+		        	}
 
-	            if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_close != '' ) {
-	        		$html .= $this->parentl1_tag_close;
-	        	}
-	        	else {
-					$html  .= $this->parent_tag_close;
-	        	}	            
-	        }
-	        else {
-	        	$html .= $this->item_tag_close; 
+					$href  = '#';				
+		        }
+		        else 
+		        {
+		        	$tag_open    = $this->item_tag_open;
+					$href        = site_url($slug);
+					$item_anchor = $this->item_anchor;
+		        }
+
+				$html .= $this->set_active($tag_open, $slug);	        	        
+
+				$html .= sprintf($item_anchor, $href, $label);
+
+		        if ( $has_children ) 
+		        {	        	
+		            $this->render_item($item['children'], $html);
+
+		            if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_close != '' ) {
+		        		$html .= $this->parentl1_tag_close;
+		        	}
+		        	else {
+						$html  .= $this->parent_tag_close;
+		        	}	            
+		        }
+		        else {
+		        	$html .= $this->item_tag_close; 
+		        }
+
 	        }
 	    }
 	    

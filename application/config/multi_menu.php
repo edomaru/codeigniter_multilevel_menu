@@ -1,9 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config["menu_id"]               = 'id';
-$config["menu_label"]            = 'name';
+// $config["menu_id"]               = 'id';
+// $config["menu_label"]            = 'name';
+// $config["menu_parent"]           = 'parent';
 $config["menu_key"]              = 'slug';
-$config["menu_parent"]           = 'parent';
 $config["menu_order"]            = 'number';
 
 $config["nav_tag_open"]          = '<ul>';
