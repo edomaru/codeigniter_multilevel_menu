@@ -15,31 +15,18 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
 
 ## How to use
 
-1. Configure the table fields if necessary in `application/config/multi_menu.php`:  
-  
+1. In `application/config/multi_menu.php`, you can also configure menu structure if necessary:
    ```php
     <?php
-    $config["menu_id"]               = 'id';
-    $config["menu_label"]            = 'name';
-    $config["menu_key"]              = 'slug';
-    $config["menu_parent"]           = 'parent';
-    $config["menu_children"]         = 'children';
-    $config["menu_order"]            = 'order';
+    $config["nav_tag_open"]      = '<ul class="nav">';
+    $config["nav_tag_close"]     = '</ul>';  
+    $config["item_tag_open"]     = '<li>';
+    $config["item_tag_close"]    = '</li>'; 
+    $config["item_active_class"] = 'active';    
     ?>
    ```
 
-2. In `application/config/multi_menu.php`, you can also configure menu structure if necessary:
-   ```php
-    <?php
-    $config["nav_tag_open"]         = '<ul>';
-    $config["nav_tag_close"]        = '</ul>';  
-    $config["item_tag_open"]         = '<li>';
-    $config["item_tag_close"]        = '</li>'; 
-    $config["item_active_class"]     = 'active';    
-    ?>
-   ```
-
-3. Load the library manually or definied in `application/config/autoload.php`, execute query, pass result array data, and you ready to render the menu. See example below:
+2. Load the library manually or load automatically definied in `application/config/autoload.php` and it's ready to use. See example below
 
    ```php
     <?php
@@ -56,8 +43,20 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
     ?>
    ```
 
+3. By default, this library use several array keys for each items. `id` for menu id, `name` for menu label or menu caption, `slug` for menu key or slug, `parent` for menu parent and `order` for menu order. You can change according to the names of fields in your database table or as needed by defining in `application/config/multi_menu.php` as follow:  
+  
+   ```php
+    <?php
+    $config["menu_id"]               = 'id';
+    $config["menu_label"]            = 'name';
+    $config["menu_key"]              = 'slug';
+    $config["menu_parent"]           = 'parent';
+    $config["menu_order"]            = 'order';
+    ?>
+   ```
 
-## Example
+
+## More Example
 
 ### Example 1 - Basic
 
@@ -68,7 +67,7 @@ This example show how to render multi level menu with active menu item **Item-0*
 ```
 
 #### Screenshoot
-![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot of Example 1")
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot of Example 1 - Basic")
 
 
 ### Example 2
@@ -99,7 +98,7 @@ echo $this->multi_menu->render('Item-0', array('Item-3', 'Item-5'));
 ```
 
 #### Screenshoot
-![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot of Example 1")
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_2.png "Codeigniter Multi level menu screenshoot of Example 2 - Bootstap 3.0")
 
 
 ### Example 3
@@ -148,5 +147,5 @@ This example show how to render multi level menu with Twitter Bootstrap 3.3. For
 ```
 
 #### Screenshoot
-![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot of Example 3 1")
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_3.png "Codeigniter Multi level menu screenshoot of Example 3 - Bootstrap 3.3 + Bootstrap submenu")
 
