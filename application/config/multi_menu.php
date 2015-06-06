@@ -13,11 +13,15 @@ $config["nav_tag_close"]         = '</ul>';
 $config["item_tag_open"]         = '<li>'; 
 $config["item_tag_close"]        = '</li>';	
 $config["parent_tag_open"]       = '<li>';	
+$config["parentl1_tag_open"]     = '';	
 $config["parent_tag_close"]      = '</li>';	
+$config["parentl1_tag_close"]    = '';	
 $config["parent_anchor_tag"]     = '<a href="%s">%s</a>';	
+$config["parentl1_anchor_tag"]   = '';	
 $config["children_tag_open"]     = '<ul>';	
 $config["children_tag_close"]    = '</ul>';	
 $config["item_divider"]          = "";
+$config["active_class_item"]     = "active";
 
 // $config["first_tag_open"]        = '<ul class="nav">';	// root_nav_open, root_nav_close
 // $config["full_tag_open"]         = '<ul>'; // nav_open

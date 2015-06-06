@@ -17,7 +17,7 @@ class Multi_menu {
 	private $full_tag_close           = '</ul>';	
 	private $item_tag_open            = '<li>';
 	private $item_tag_close           = '</li>';
-	private $active_item_class        = '<li class="active">';	
+	private $active_class_item        = '<li class="active">';	
 	private $anchor_item              = '<a href="%s">%s</a>';
 	private $divided_items_list       = array();
 	private $divided_items_list_count = 0;
@@ -190,9 +190,18 @@ class Multi_menu {
 
 	        if ($has_children) 
 	        {
-				$html       .= $this->parent_tag_open;
-				$href        = '#';
-				$anchor_item = $this->parent_anchor_tag;				
+	        	if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_open != '' ) 
+	        	{
+					$html       .=  $this->parentl1_tag_open;
+					$anchor_item = $this->parentl1_anchor_tag != '' ? $this->parentl1_anchor_tag : $this->parent_anchor_tag;
+	        	}
+	        	else 
+	        	{
+					$html       .= $this->parent_tag_open;
+					$anchor_item = $this->parent_anchor_tag;
+	        	}
+
+				$href        = '#';				
 	        }
 	        else 
 	        {
@@ -202,7 +211,7 @@ class Multi_menu {
 
 	        }
 
-	        // $html .= $active == $slug ? $this->active_item_class : $this->item_tag_open; 
+	        // $html .= $active == $slug ? $this->active_class_item : $this->item_tag_open; 
 	        
 	        // if ( isset($this->{'anchor_item_' . $slug}) ) {
 	        // 	$anchor_item = 	$this->{'anchor_item_' . $slug};
@@ -220,12 +229,16 @@ class Multi_menu {
 	        {	        	
 	            $this->render_item($item[$this->menu_children], $active, $html);
 
-	            $html  .= $this->parent_tag_close;
+	            if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_close != '' ) {
+	        		$html .= $this->parentl1_tag_close;
+	        	}
+	        	else {
+					$html  .= $this->parent_tag_close;
+	        	}	            
 	        }
 	        else {
 	        	$html .= $this->item_tag_close; 
 	        }
-
 	    }
 	    
 	    if (isset($nav_tag_opened)) {	    	

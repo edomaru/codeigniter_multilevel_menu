@@ -18,7 +18,8 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-        <h1>Bootstrap Submenu Plugin Demos</h1>
+        <h1>Codeigniter Multi Level menu</h1>
+        <h2>with Bootstrap 3.4 & Bootstrap Submenu Plugin Demos</h2>
     </div>
 
     <h3>Dropdown</h3>
@@ -29,10 +30,11 @@
         </button>
 
         <?php echo $this->multi_menu->render(array(
-            'nav_tag_open' => '<ul class="dropdown-menu" role="menu">',
-            'nav_tag_close' => '</ul>',
-            'parent_tag_open' => '<li class="dropdown-submenu">',
-            'parent_anchor_tag' => '<a href="%s" data-toggle="dropdown">%s</a>'
+            'nav_tag_open'      => '<ul class="dropdown-menu" role="menu">',
+            'nav_tag_close'     => '</ul>',
+            'parent_tag_open'   => '<li class="dropdown-submenu">',
+            'parent_anchor_tag' => '<a href="%s" data-toggle="dropdown">%s</a>',
+            'children_tag_open' => '<ul class="dropdown-menu">'
         )); ?>
 
     </div>
@@ -52,169 +54,30 @@
       </div>
 
       <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="dropdown">
-            <a tabindex="0" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
 
-            <!-- role="menu": fix moved by arrows (Bootstrap dropdown) -->
-            <ul class="dropdown-menu" role="menu">
-              <li class="dropdown-submenu">
-                <a tabindex="0" data-toggle="dropdown">Action</a>
-
-                <ul class="dropdown-menu">
-                  <li><a tabindex="0">Sub action</a></li>
-                  <li class="dropdown-submenu">
-                    <a tabindex="0" data-toggle="dropdown">Another sub action</a>
-
-                    <ul class="dropdown-menu">
-                      <li><a tabindex="0">Sub action</a></li>
-                      <li><a tabindex="0">Another sub action</a></li>
-                      <li><a tabindex="0">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li><a tabindex="0">Something else here</a></li>
-                  <li class="dropdown-submenu">
-                    <a tabindex="0" data-toggle="dropdown">Another action</a>
-
-                    <ul class="dropdown-menu">
-                      <li><a tabindex="0">Sub action</a></li>
-                      <li><a tabindex="0">Another sub action</a></li>
-                      <li><a tabindex="0">Something else here</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-
-              <li class="dropdown-submenu">
-                <a tabindex="0" data-toggle="dropdown">Another action</a>
-
-                <ul class="dropdown-menu">
-                  <li><a tabindex="0">Sub action</a></li>
-                  <li><a tabindex="0">Another sub action</a></li>
-                  <li><a tabindex="0">Something else here</a></li>
-                </ul>
-              </li>
-              <li><a tabindex="0">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a tabindex="0">Separated link</a></li>
-            </ul>
-          </li>
-          <li class="dropdown">
-            <a data-toggle="dropdown" tabindex="0" aria-expanded="false">Dropdown 2<span class="caret"></span></a>
-
-            <!-- role="menu": fix moved by arrows (Bootstrap dropdown) -->
-            <ul role="menu" class="dropdown-menu">
-              <li class="dropdown-submenu">
-                <a data-toggle="dropdown" tabindex="0">Action</a>
-
-                <ul class="dropdown-menu">
-                  <li><a tabindex="0">Sub action</a></li>
-                  <li class="dropdown-submenu">
-                    <a data-toggle="dropdown" tabindex="0">Another sub action</a>
-
-                    <ul class="dropdown-menu">
-                      <li><a tabindex="0">Sub action</a></li>
-                      <li><a tabindex="0">Another sub action</a></li>
-                      <li><a tabindex="0">Something else here</a></li>
-                    </ul>
-                  </li>
-                  <li><a tabindex="0">Something else here</a></li>
-                </ul>
-              </li>
-              <li><a tabindex="0">Another action</a></li>
-              <li class="dropdown-submenu">
-                <a data-toggle="dropdown" tabindex="0" aria-expanded="false">Something else here</a>
-
-                <ul class="dropdown-menu">
-                  <li><a tabindex="0">Sub action</a></li>
-                  <li><a tabindex="0">Another sub action</a></li>
-                  <li><a tabindex="0">Something else here</a></li>
-                </ul>
-              </li>
-              <li class="divider"></li>
-              <li><a tabindex="0">Separated link</a></li>
-            </ul>
-          </li>
-        </ul>
+        <?php echo $this->multi_menu->render(array(
+            'nav_tag_open'        => '<ul class="nav navbar-nav">',            
+            'parentl1_tag_open'   => '<li class="dropdown">',
+            'parentl1_anchor_tag' => '<a tabindex="0" data-toggle="dropdown" href="%s">%s<span class="caret"></span></a>',
+            'parent_tag_open'     => '<li class="dropdown-submenu">',
+            'parent_anchor_tag'   => '<a href="%s" data-toggle="dropdown">%s</a>',
+            'children_tag_open'   => '<ul class="dropdown-menu">'
+        )); ?>
+        
       </div>
     </nav>
 
     <h3>Pills</h3>
-    <ul class="nav nav-pills">
-      <li class="active"><a tabindex="0">Regular link</a></li>
-      <li class="dropdown">
-        <a tabindex="0" data-toggle="dropdown">Dropdown<span class="caret"></span></a>
-
-        <!-- role="menu": fix moved by arrows (Bootstrap dropdown) -->
-        <ul class="dropdown-menu" role="menu">
-          <li class="dropdown-submenu">
-            <a tabindex="0" data-toggle="dropdown">Action</a>
-
-            <ul class="dropdown-menu">
-              <li><a tabindex="0">Sub action</a></li>
-              <li class="dropdown-submenu">
-                <a tabindex="0" data-toggle="dropdown">Another sub action</a>
-
-                <ul class="dropdown-menu">
-                  <li><a tabindex="0">Sub action</a></li>
-                  <li><a tabindex="0">Another sub action</a></li>
-                  <li><a tabindex="0">Something else here</a></li>
-                </ul>
-              </li>
-              <li><a tabindex="0">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="dropdown-submenu">
-            <a tabindex="0" data-toggle="dropdown">Another action</a>
-
-            <ul class="dropdown-menu">
-              <li><a tabindex="0">Sub action</a></li>
-              <li><a tabindex="0">Another sub action</a></li>
-              <li><a tabindex="0">Something else here</a></li>
-            </ul>
-          </li>
-          <li><a tabindex="0">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a tabindex="0">Separated link</a></li>
-        </ul>
-      </li>
-      <li class="dropdown">
-        <a tabindex="0" data-toggle="dropdown">Dropdown 2<span class="caret"></span></a>
-
-        <!-- role="menu": fix moved by arrows (Bootstrap dropdown) -->
-        <ul class="dropdown-menu" role="menu">
-          <li class="dropdown-submenu">
-            <a tabindex="0" data-toggle="dropdown">Action</a>
-
-            <ul class="dropdown-menu">
-              <li><a tabindex="0">Sub action</a></li>
-              <li class="dropdown-submenu">
-                <a tabindex="0" data-toggle="dropdown">Another sub action</a>
-
-                <ul class="dropdown-menu">
-                  <li><a tabindex="0">Sub action</a></li>
-                  <li><a tabindex="0">Another sub action</a></li>
-                  <li><a tabindex="0">Something else here</a></li>
-                </ul>
-              </li>
-              <li><a tabindex="0">Something else here</a></li>
-            </ul>
-          </li>
-          <li><a tabindex="0">Another action</a></li>
-          <li class="dropdown-submenu">
-            <a tabindex="0" data-toggle="dropdown">Something else here</a>
-
-            <ul class="dropdown-menu">
-              <li><a tabindex="0">Sub action</a></li>
-              <li><a tabindex="0">Another sub action</a></li>
-              <li><a tabindex="0">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="divider"></li>
-          <li><a tabindex="0">Separated link</a></li>
-        </ul>
-      </li>
-    </ul>
+    <?php echo $this->multi_menu->render(array(
+        'nav_tag_open'        => '<ul class="nav nav-pills">',            
+        'parentl1_tag_open'   => '<li class="dropdown">',
+        'parentl1_anchor_tag' => '<a tabindex="0" data-toggle="dropdown" href="%s">%s<span class="caret"></span></a>',
+        'parent_tag_open'     => '<li class="dropdown-submenu">',
+        'parent_anchor_tag'   => '<a href="%s" data-toggle="dropdown">%s</a>',
+        'children_tag_open'   => '<ul class="dropdown-menu">',
+        'active_item'         => 'Item-6'
+    )); ?>
+    
 </div>
   
 </body>
