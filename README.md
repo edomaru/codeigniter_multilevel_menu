@@ -67,7 +67,7 @@ This example show how to render multi level menu with active menu item **Item-0*
 ```
 
 #### Screenshoot
-![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.png "Codeigniter Multi level menu screenshoot of Example 1 - Basic")
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.jpg "Codeigniter Multi level menu screenshoot of Example 1 - Basic")
 
 
 ### Example 2
@@ -98,7 +98,7 @@ echo $this->multi_menu->render('Item-0', array('Item-3', 'Item-5'));
 ```
 
 #### Screenshoot
-![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_2.png "Codeigniter Multi level menu screenshoot of Example 2 - Bootstap 3.0")
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_2.jpg "Codeigniter Multi level menu screenshoot of Example 2 - Bootstap 3.0")
 
 
 ### Example 3
@@ -147,5 +147,5 @@ This example show how to render multi level menu with Twitter Bootstrap 3.3. For
 ```
 
 #### Screenshoot
-![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_3.png "Codeigniter Multi level menu screenshoot of Example 3 - Bootstrap 3.3 + Bootstrap submenu")
+![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_3.jpg "Codeigniter Multi level menu screenshoot of Example 3 - Bootstrap 3.3 + Bootstrap submenu")
 
