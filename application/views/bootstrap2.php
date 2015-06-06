@@ -19,7 +19,7 @@
   <div class="container">
     <div class="jumbotron">
         <h1>Codeigniter Multi Level menu</h1>
-        <h2>with Bootstrap 3.4 & Bootstrap Submenu Plugin Demos</h2>
+        <h2>with Bootstrap 3.3 & Bootstrap Submenu Plugin Demos</h2>
     </div>
 
     <h3>Dropdown</h3>

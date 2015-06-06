@@ -21,7 +21,8 @@ $config["parentl1_anchor_tag"]   = '';
 $config["children_tag_open"]     = '<ul>';	
 $config["children_tag_close"]    = '</ul>';	
 $config["item_divider"]          = "";
-$config["active_class_item"]     = "active";
+$config["class_active_item"]     = "active";
+$config["active_item"]           = "";
 
 // $config["first_tag_open"]        = '<ul class="nav">';	// root_nav_open, root_nav_close
 // $config["full_tag_open"]         = '<ul>'; // nav_open

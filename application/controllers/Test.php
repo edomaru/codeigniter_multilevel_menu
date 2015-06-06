@@ -41,19 +41,7 @@ class Test extends CI_Controller {
 	}
 
 	public function bootstrap2()
-	{
-		$config["nav_tag_open"]          = '<ul class="nav navbar-nav">';
-		$config["nav_tag_close"]         = '</ul>';
-		$config["item_tag_open"]         = '<li>'; 
-		$config["item_tag_close"]        = '</li>';	
-		$config["parent_tag_open"]       = '<li class="dropdown-submenu">';	
-		$config["parent_tag_close"]      = '</li>';	
-		$config["parent_anchor_tag"]     = '<a href="%s" class="dropdown-toggle" data-toggle="dropdown">%s</a>';	
-		$config["children_tag_open"]     = '<ul class="dropdown-menu">';	
-		$config["children_tag_close"]    = '</ul>';	
-		$config["item_divider"]          = "<li class='divider'></li>";
-		
-		$this->multi_menu->initialize($config);
+	{		
 		$this->load->view("bootstrap2");
 	}
 

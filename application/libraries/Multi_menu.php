@@ -12,12 +12,13 @@
  */
 class Multi_menu {
 
-	private $nav_tag_open            = '<ul class="nav">';
+	private $nav_tag_open             = '<ul class="nav">';
 	private $full_tag_open            = '<ul>';
 	private $full_tag_close           = '</ul>';	
 	private $item_tag_open            = '<li>';
 	private $item_tag_close           = '</li>';
-	private $active_class_item        = '<li class="active">';	
+	private $class_active_item        = 'active';	
+	private $active_item              = '';	
 	private $anchor_item              = '<a href="%s">%s</a>';
 	private $divided_items_list       = array();
 	private $divided_items_list_count = 0;
@@ -81,12 +82,15 @@ class Multi_menu {
      * @param  string 	$divider 				divider item
      * @return string               
      */
-    public function render($active = "", $divided_items_list = array(), $divider = '')
+    public function render($config = "", $divided_items_list = array(), $divider = '')
     {
 		$html  = "";
 
-		if ( is_array($active) ) {
-			$this->initialize($active);	
+		if ( is_array($config) ) {
+			$this->initialize($config);	
+		}
+		elseif (is_string($config)) {
+			$this->active_item = $config;
 		}
 
     	if ( count($this->items) ) 
@@ -95,7 +99,7 @@ class Multi_menu {
 
 			$this->set_divided_items($divided_items_list, $divider);
 
-	        $this->render_item($items, $active, $html);
+	        $this->render_item($items, $html);
     	}
 
         return $html;
@@ -158,7 +162,7 @@ class Multi_menu {
      * @param  string &$html  html menu
      * @return void         
      */
-    private function render_item($items, $active, &$html = '')
+    private function render_item($items, &$html = '')
 	{	    
 	    if ( empty($html) ) 
 	    {
@@ -192,12 +196,12 @@ class Multi_menu {
 	        {
 	        	if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_open != '' ) 
 	        	{
-					$html       .=  $this->parentl1_tag_open;
+					$tag_open    =  $this->parentl1_tag_open;
 					$anchor_item = $this->parentl1_anchor_tag != '' ? $this->parentl1_anchor_tag : $this->parent_anchor_tag;
 	        	}
 	        	else 
 	        	{
-					$html       .= $this->parent_tag_open;
+					$tag_open     = $this->parent_tag_open;
 					$anchor_item = $this->parent_anchor_tag;
 	        	}
 
@@ -205,13 +209,13 @@ class Multi_menu {
 	        }
 	        else 
 	        {
-	        	$html       .= $this->item_tag_open;
+	        	$tag_open    = $this->item_tag_open;
 				$href        = site_url($slug);
 				$anchor_item = "<a href='%s'>%s</a>";
 
 	        }
 
-	        // $html .= $active == $slug ? $this->active_class_item : $this->item_tag_open; 
+	        $html .= $this->set_active($tag_open, $slug);
 	        
 	        // if ( isset($this->{'anchor_item_' . $slug}) ) {
 	        // 	$anchor_item = 	$this->{'anchor_item_' . $slug};
@@ -227,7 +231,7 @@ class Multi_menu {
 
 	        if ( $has_children ) 
 	        {	        	
-	            $this->render_item($item[$this->menu_children], $active, $html);
+	            $this->render_item($item[$this->menu_children], $html);
 
 	            if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_close != '' ) {
 	        		$html .= $this->parentl1_tag_close;
@@ -239,6 +243,7 @@ class Multi_menu {
 	        else {
 	        	$html .= $this->item_tag_close; 
 	        }
+
 	    }
 	    
 	    if (isset($nav_tag_opened)) {	    	
@@ -247,6 +252,22 @@ class Multi_menu {
 	    else {	   
 	    	$html  .= $this->children_tag_close;
 	    }
+	}
+
+	private function set_active($html, $slug)
+	{
+		if ($slug == $this->active_item) 
+		{
+			$doc = new DOMDocument();
+			$doc->loadHTML($html);
+			foreach($doc->getElementsByTagName('*') as $tag ){
+				$tag->setAttribute('class', ($tag->hasAttribute('class') ? $tag->getAttribute('class') . ' ' : '') . $this->class_active_item);
+			}
+
+			return preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $doc->saveHTML() );
+		}
+		return $html;
+
 	}
 
 }
