@@ -67,7 +67,7 @@
             <a id="dLabel" role="button" data-toggle="dropdown" class="btn btn-primary" data-target="#" href="/page.html">
                 Dropdown <span class="caret"></span>
             </a>
-    		<?php echo $this->multi_menu->render('Item-0', array('Item-5')); ?>
+    		<?php echo $this->multi_menu->render('Item-0', array('Item-3', 'Item-5')); ?>
         </div>
         <br>
         <p>Using Bootstrap snippet created by <a href='http://bootsnipp.com/snippets/featured/multi-level-dropdown-menu-bs3'>msurguy</a></p>

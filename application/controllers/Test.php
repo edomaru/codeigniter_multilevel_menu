@@ -25,15 +25,10 @@ class Test extends CI_Controller {
 
 	public function bootstrap1()
 	{
-		$config["nav_tag_open"]          = '<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">';
-		$config["nav_tag_close"]         = '</ul>';
-		$config["item_tag_open"]         = '<li>'; 
-		$config["item_tag_close"]        = '</li>';	
-		$config["parent_tag_open"]       = '<li class="dropdown-submenu">';	
-		$config["parent_tag_close"]      = '</li>';	
+		$config["nav_tag_open"]          = '<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">';		
+		$config["parent_tag_open"]       = '<li class="dropdown-submenu">';			
 		$config["parent_anchor_tag"]     = '<a tabindex="-1" href="%s">%s</a>';	
-		$config["children_tag_open"]     = '<ul class="dropdown-menu">';	
-		$config["children_tag_close"]    = '</ul>';	
+		$config["children_tag_open"]     = '<ul class="dropdown-menu">';			
 		$config["item_divider"]          = "<li class='divider'></li>";
 
 		$this->multi_menu->initialize($config);

@@ -12,25 +12,188 @@
  */
 class Multi_menu {
 
-	private $nav_tag_open             = '<ul class="nav">';
-	private $full_tag_open            = '<ul>';
-	private $full_tag_close           = '</ul>';	
-	private $item_tag_open            = '<li>';
-	private $item_tag_close           = '</li>';
-	private $class_active_item        = 'active';	
-	private $active_item              = '';	
-	private $anchor_item              = '<a href="%s">%s</a>';
-	private $divided_items_list       = array();
-	private $divided_items_list_count = 0;
-	private $item_divider             = '';
-	private $menu_id                  = 'id';
-	private $menu_label               = 'name';
-	private $menu_key                 = 'key';
-	private $menu_parent              = 'parent';
-	private $menu_children            = 'children';
-	private $menu_order               = 'order';
-	private $_has_children            = false;
+	/**
+	 * Tag opener of the navigation menu
+	 * default is '<ul>' tag
+	 * 
+	 * @var string
+	 */
+	private $nav_tag_open             = '<ul>';
 
+	/**
+	 * Closing tag of the navigation menu
+	 * default is '</ul>'
+	 * 
+	 * @var string
+	 */
+	private $nav_tag_close            = '</ul>';	
+
+	/**
+	 * Tag opening tag of the menu item
+	 * default is '</li>'
+	 * 
+	 * @var string
+	 */
+	private $item_tag_open            = '<li>';
+
+	/**
+	 * Closing tag of the menu item
+	 * default is '</li>'
+	 * 
+	 * @var string
+	 */
+	private $item_tag_close           = '</li>';
+
+	/**
+	 * Opening tag of the menu item that has children
+	 * default is '</li>'
+	 * 
+	 * @var string
+	 */
+	private $parent_tag_open          = '<li>';
+
+	/**
+	 * Closing tag of the menu item that has children
+	 * default is '</li>'
+	 * 
+	 * @var string
+	 */
+	private $parent_tag_close         = '</li>';
+
+	/**
+	 * Anchor tag of the menu item that has children
+	 * default is '<a href="%s">%s</a>'
+	 * 
+	 * @var string
+	 */
+	private $parent_anchor            = '<a href="%s">%s</a>';
+
+	/**
+	 * Opening tag of the menu item level one that has children
+	 * if not definied or empty, it would use $parent_tag_open
+	 * 
+	 * @var string
+	 */
+	private $parentl1_tag_open        = '';
+
+	/**
+	 * Closing tag of the menu item level one that has children
+	 * if not definied or empty, it would use $parent_tag_close
+	 * 
+	 * @var string
+	 */
+	private $parentl1_tag_close       = '';
+
+	/**
+	 * Anchor tag of the menu item level one that has children
+	 * if not definied or empty, it would use $parent_anchor
+	 * 
+	 * @var string
+	 */
+	private $parentl1_anchor          = '';
+
+	/**
+	 * Opening tag of the children menu / sub menu.
+	 * Default is '<ul>'
+	 * 
+	 * @var string
+	 */
+	private $children_tag_open        = '<ul>';
+
+	/**
+	 * Closing tag of the children menu / sub menu.
+	 * Default is '<ul>'
+	 * 
+	 * @var string
+	 */
+	private $children_tag_close       = '</ul>';
+
+	/**
+	 * The active item class
+	 * Default is 'active'
+	 * 
+	 * @var string
+	 */
+	private $item_active_class        = 'active';	
+
+	/**
+	 * The item that has active class.
+	 * Please specify the menu slug here
+	 * 
+	 * @var string
+	 */
+	private $item_active              = '';	
+
+	/**
+	 * Anchor tag of the menu item.
+	 * Default is '<a href="%s">%s</a>'
+	 * 
+	 * @var string
+	 */
+	private $item_anchor              = '<a href="%s">%s</a>';
+
+	/**
+	 * The list of menu items that has divider
+	 * 
+	 * @var string
+	 */
+	private $divided_items_list       = array();
+
+	/**
+	 * number of the items that has divider
+	 * 
+	 * @var string
+	 */
+	private $divided_items_list_count = 0;
+
+	/**
+	 * Divider of the item
+	 * ex: '<li class="divider"></li>'
+	 * 
+	 * @var string
+	 */
+	private $item_divider             = '';
+
+	/**
+	 * Array key that holds Menu id
+	 * Ex: $items['id'] = 1
+	 * 
+	 * @var string
+	 */
+	private $menu_id                  = 'id';
+
+	/**
+	 * Array key that holds Menu label
+	 * Ex: $items['name'] = "Something"
+	 * 
+	 * @var string
+	 */
+	private $menu_label               = 'name';
+
+	/**
+	 * Array key that holds Menu key/ menu slug
+	 * Ex: $items['key'] = "something"
+	 * 
+	 * @var string
+	 */
+	private $menu_key                 = 'key';
+
+	/**
+	 * Array key that holds Menu parent
+	 * Ex: $items['parent'] = 1
+	 * 
+	 * @var string
+	 */
+	private $menu_parent              = 'parent';	
+
+	/**
+	 * Array key that holds Menu Ordering
+	 * Ex: $items['order'] = 1
+	 * 
+	 * @var string
+	 */
+	private $menu_order               = 'order';	
+	
 
 	/**
 	 * load configuration on config/multi_menu.php
@@ -69,20 +232,24 @@ class Multi_menu {
 	 */
 	public function set_divided_items($items = array(), $divider = null)
 	{
-		$this->divided_items_list       = $items;
-		$this->item_divider             = $divider ? $divider : $this->item_divider;
-		$this->divided_items_list_count = count($this->divided_items_list);
+		if ( count($items) ) 
+		{
+			$this->divided_items_list       = $items;
+			$this->item_divider             = $divider ? $divider : $this->item_divider;
+			$this->divided_items_list_count = count($this->divided_items_list);
+		}
 	}
 
 	/**
      * Render the menu
      *
-     * @param  boolean 	$render      			direct render or not, default is direct render  
+     * @param  boolean 	$config      			configuration of the library. if not defined would use default config.
+     *                                  		It also possible to define active item of the menu here with string value.
      * @param  array 	$divided_items_list 	menu items that would be divided   
      * @param  string 	$divider 				divider item
      * @return string               
      */
-    public function render($config = "", $divided_items_list = array(), $divider = '')
+    public function render($config = array(), $divided_items_list = array(), $divider = '')
     {
 		$html  = "";
 
@@ -90,7 +257,7 @@ class Multi_menu {
 			$this->initialize($config);	
 		}
 		elseif (is_string($config)) {
-			$this->active_item = $config;
+			$this->item_active = $config;
 		}
 
     	if ( count($this->items) ) 
@@ -131,7 +298,7 @@ class Multi_menu {
 			if ($item[$this->menu_parent] == $parent) 
 			{
 				$items[$item[$this->menu_id]] = $item;
-				$items[$item[$this->menu_id]][$this->menu_children] = $this->prepare_items($data, $item[$this->menu_id]);
+				$items[$item[$this->menu_id]]['children'] = $this->prepare_items($data, $item[$this->menu_id]);
 			}	
 		}
 
@@ -158,7 +325,6 @@ class Multi_menu {
      * Render data into menu items
      * 
      * @param  array  $items  consructed data
-     * @param  string $active item which would be active
      * @param  string &$html  html menu
      * @return void         
      */
@@ -171,8 +337,7 @@ class Multi_menu {
 		}		
 		else {
 	    	$html .= $this->children_tag_open; 
-		}
-		
+		}		
 	  
 	    foreach ($items as $item)
 	    {
@@ -183,9 +348,7 @@ class Multi_menu {
 	        $slug  = $item[$this->menu_key];
 
 	        // has children or not
-	        $has_children = ! empty($item[$this->menu_children]);	        
-
-	        // $href = $has_children ? '#' : site_url($slug);
+	        $has_children = ! empty($item['children']);	        
 
 	        // if menu item need separator 
 	        if ($this->divided_items_list_count > 0 && in_array($slug, $this->divided_items_list)) {
@@ -197,41 +360,30 @@ class Multi_menu {
 	        	if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_open != '' ) 
 	        	{
 					$tag_open    =  $this->parentl1_tag_open;
-					$anchor_item = $this->parentl1_anchor_tag != '' ? $this->parentl1_anchor_tag : $this->parent_anchor_tag;
+					$item_anchor = $this->parentl1_anchor != '' ? $this->parentl1_anchor : $this->parent_anchor;
 	        	}
 	        	else 
 	        	{
 					$tag_open     = $this->parent_tag_open;
-					$anchor_item = $this->parent_anchor_tag;
+					$item_anchor = $this->parent_anchor;
 	        	}
 
-				$href        = '#';				
+				$href  = '#';				
 	        }
 	        else 
 	        {
 	        	$tag_open    = $this->item_tag_open;
 				$href        = site_url($slug);
-				$anchor_item = "<a href='%s'>%s</a>";
-
+				$item_anchor = $this->item_anchor;
 	        }
 
-	        $html .= $this->set_active($tag_open, $slug);
-	        
-	        // if ( isset($this->{'anchor_item_' . $slug}) ) {
-	        // 	$anchor_item = 	$this->{'anchor_item_' . $slug};
-	        // }
-	        // elseif ( $has_children ) {
-	        // 	$anchor_item = $this->parent_anchor_item;
-	        // }
-	        // else {
-	        // 	$anchor_item = $this->anchor_item;
-	        // }	        
-	        
-        	$html  .= sprintf($anchor_item, $href, $label);
+			$html .= $this->set_active($tag_open, $slug);	        	        
+
+			$html .= sprintf($item_anchor, $href, $label);
 
 	        if ( $has_children ) 
 	        {	        	
-	            $this->render_item($item[$this->menu_children], $html);
+	            $this->render_item($item['children'], $html);
 
 	            if ( is_null($item[$this->menu_parent]) && $this->parentl1_tag_close != '' ) {
 	        		$html .= $this->parentl1_tag_close;
@@ -243,7 +395,6 @@ class Multi_menu {
 	        else {
 	        	$html .= $this->item_tag_close; 
 	        }
-
 	    }
 	    
 	    if (isset($nav_tag_opened)) {	    	
@@ -254,20 +405,26 @@ class Multi_menu {
 	    }
 	}
 
+	/**
+	 * Set active item
+	 * 
+	 * @param string $html html tag that would be injected
+	 * @param string $slug html tag that has injected with active class
+	 */
 	private function set_active($html, $slug)
 	{
-		if ($slug == $this->active_item) 
+		if ($this->item_active != '' && $slug == $this->item_active) 
 		{
 			$doc = new DOMDocument();
 			$doc->loadHTML($html);
 			foreach($doc->getElementsByTagName('*') as $tag ){
-				$tag->setAttribute('class', ($tag->hasAttribute('class') ? $tag->getAttribute('class') . ' ' : '') . $this->class_active_item);
+				$tag->setAttribute('class', ($tag->hasAttribute('class') ? $tag->getAttribute('class') . ' ' : '') . $this->item_active_class);
 			}
 
 			return preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $doc->saveHTML() );
 		}
-		return $html;
 
+		return $html;
 	}
 
 }

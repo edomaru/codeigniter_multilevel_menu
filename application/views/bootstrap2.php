@@ -31,7 +31,6 @@
 
         <?php echo $this->multi_menu->render(array(
             'nav_tag_open'      => '<ul class="dropdown-menu" role="menu">',
-            'nav_tag_close'     => '</ul>',
             'parent_tag_open'   => '<li class="dropdown-submenu">',
             'parent_anchor_tag' => '<a href="%s" data-toggle="dropdown">%s</a>',
             'children_tag_open' => '<ul class="dropdown-menu">'
@@ -54,16 +53,14 @@
       </div>
 
       <div class="collapse navbar-collapse">
-
         <?php echo $this->multi_menu->render(array(
             'nav_tag_open'        => '<ul class="nav navbar-nav">',            
             'parentl1_tag_open'   => '<li class="dropdown">',
-            'parentl1_anchor_tag' => '<a tabindex="0" data-toggle="dropdown" href="%s">%s<span class="caret"></span></a>',
+            'parentl1_anchor'     => '<a tabindex="0" data-toggle="dropdown" href="%s">%s<span class="caret"></span></a>',
             'parent_tag_open'     => '<li class="dropdown-submenu">',
-            'parent_anchor_tag'   => '<a href="%s" data-toggle="dropdown">%s</a>',
+            'parent_anchor'       => '<a href="%s" data-toggle="dropdown">%s</a>',
             'children_tag_open'   => '<ul class="dropdown-menu">'
         )); ?>
-        
       </div>
     </nav>
 
@@ -71,11 +68,11 @@
     <?php echo $this->multi_menu->render(array(
         'nav_tag_open'        => '<ul class="nav nav-pills">',            
         'parentl1_tag_open'   => '<li class="dropdown">',
-        'parentl1_anchor_tag' => '<a tabindex="0" data-toggle="dropdown" href="%s">%s<span class="caret"></span></a>',
+        'parentl1_anchor'     => '<a tabindex="0" data-toggle="dropdown" href="%s">%s<span class="caret"></span></a>',
         'parent_tag_open'     => '<li class="dropdown-submenu">',
-        'parent_anchor_tag'   => '<a href="%s" data-toggle="dropdown">%s</a>',
+        'parent_anchor'       => '<a href="%s" data-toggle="dropdown">%s</a>',
         'children_tag_open'   => '<ul class="dropdown-menu">',
-        'active_item'         => 'Item-6'
+        'item_active'         => 'Item-6'
     )); ?>
     
 </div>
