@@ -156,3 +156,76 @@ This example show how to render multi level menu with Twitter Bootstrap 3.3. For
 #### Screenshoot
 ![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot_3.jpg "Codeigniter Multi level menu screenshoot of Example 3 - Bootstrap 3.3 + Bootstrap submenu")
 
+
+## How to apply icons in menu item ?
+
+You can choose 3 options:
+
+### Option 1
+
+You can define icon in menu label. See this example data:
+
+```php
+<?php
+$data = array(
+    array(
+        'id' => 1,
+        'name' => '<i class="fa fa-trash"></i> First Menu', // <--
+        'parent' => null,
+        'slug' => 'menu-1',
+    ),
+    ...
+);
+?>
+```
+
+### Option 2
+
+You can define every icon item in your array data. see this example data:
+
+```php
+<?php
+$data = array(
+    array(
+        'id' => 1,
+        'name' => 'First Menu',
+        'parent' => null,
+        'slug' => 'menu-1',
+        'icon' => 'fa fa-trash' // <--
+    ),
+    ...
+);
+?>
+```
+
+This would generate menu item like so:
+
+```html
+<li>
+    <a href="menu-1"><i class="fa fa-trash"></i> First Menu</a>
+</li>
+```
+
+
+Just in case you want position the position the menu on the right side, you can add this line in your configuration:
+
+```php
+<?php 
+$config['icon_position'] = 'right'; 
+?>
+```
+
+
+### Option 3
+
+You can apply menu icon by define icon list in configuration this way:
+
+```php
+<?php 
+$config['menu_icon_lists'] = array(
+    'slug-menu-1' => 'fa fa-list',
+    'slug-menu-2' => 'fa fa-plus',
+    'slug-menu-3' => 'fa fa-trash',
+);
+?>
+```

@@ -168,7 +168,7 @@ class Multi_menu {
 	 * 
 	 * @var string
 	 */
-	private $menu_label               = 'name';
+	private $menu_label               = 'name';	
 
 	/**
 	 * Array key that holds Menu key/ menu slug
@@ -193,6 +193,38 @@ class Multi_menu {
 	 * @var string
 	 */
 	private $menu_order               = 'order';	
+
+	/**
+	 * Array key that holds Menu Icon
+	 * Ex: $items['icon'] = "fa fa-list"
+	 * 
+	 * @var string
+	 */
+	private $menu_icon               = 'icon';
+
+	/**
+	 * Position of the menu icon
+	 * left or right
+	 * 
+	 * @var string
+	 */
+	private $icon_position           = 'left';
+
+	/**
+	 * Base url of the image icon (draft)
+	 * It would be use codeigniter base url if not define
+	 * Ex: http://localhost/assets/img
+	 * 
+	 * @var string
+	 */
+	private $icon_img_base_url       = null;
+
+	/**
+	 * List of the menus icon
+	 * 
+	 * @var string
+	 */
+	private $menu_icons_list         = null;
 	
 
 	/**
@@ -346,6 +378,19 @@ class Multi_menu {
 	        {
 		        $label = $item[$this->menu_label];
 
+		        // icon
+		        $icon  = empty($item[$this->menu_icon]) ? '' : $item[$this->menu_icon];
+		        if ( isset($this->menu_icons_list[($item[$this->menu_key])]) ) {
+		        	$icon = $this->menu_icons_list[($item[$this->menu_key])];
+		        }		        
+
+		        if ($icon) 
+		        {
+		        	$icon = "<i class='{$icon}'></i>";
+		        	$label = trim( $this->icon_position == 'right' ? ($label . " " . $icon ) : ($icon . " " . $label) );
+		        }
+
+
 		        // menu slug
 		        $slug  = $item[$this->menu_key];
 
@@ -381,7 +426,12 @@ class Multi_menu {
 
 				$html .= $this->set_active($tag_open, $slug);	        	        
 
-				$html .= sprintf($item_anchor, $href, $label);
+				if (substr_count($item_anchor, '%s') == 2) {
+					$html .= sprintf($item_anchor, $href, $label);
+				}
+				else {
+					$html .= sprintf($item_anchor, $label);	
+				}
 
 		        if ( $has_children ) 
 		        {	        	
