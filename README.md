@@ -229,3 +229,21 @@ $config['menu_icon_lists'] = array(
 );
 ?>
 ```
+
+
+## Inject menu item(s)
+
+If you want to add additional item in menu, you can place in first or last position by following this examaple:
+
+```php
+<?php // sample menu item that would be injected ?>
+<?php $additional_item1 = '<li><a href="#">Additional Item 1</a></li>'; ?>
+<?php $additional_item2 = '<li><a href="#">Additional Item 2</a></li>'; ?>
+
+<?php 
+    // call inject_item() method before render() method called
+    echo $this->multi_menu
+                ->inject_item($additional_item1, 'first')
+                ->inject_item($additional_item2) // at last position by default
+                ->render('Item-0'); ?>
+```

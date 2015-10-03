@@ -7,6 +7,7 @@
 <body>
 	<ul>
 		<li><a href="<?php echo site_url("test/basic") ?>">Basic Example</a></li>
+		<li><a href="<?php echo site_url("test/inject") ?>">Basic Example With inject men item</a></li>
 		<li><a href="<?php echo site_url("test/bootstrap1") ?>">Twitter Bootstrap Example 1</a></li>
 		<li><a href="<?php echo site_url("test/bootstrap2") ?>">Twitter Bootstrap Example 2</a></li>
 	</ul>

@@ -225,6 +225,13 @@ class Multi_menu {
 	 * @var string
 	 */
 	private $menu_icons_list         = null;
+
+	/**
+	 * Store additional menu items
+	 * 
+	 * @var string
+	 */
+	private $_additional_item        = array();
 	
 
 	/**
@@ -366,6 +373,11 @@ class Multi_menu {
 	    {
 	    	$nav_tag_opened = true;
 			$html .= $this->nav_tag_open;
+
+			// check is there additiona menu item for the the first place
+			if ( ! empty($this->_additional_item['first'])) {
+				$html .= $this->_additional_item['first'];
+			}
 		}		
 		else {
 	    	$html .= $this->children_tag_open; 
@@ -451,12 +463,36 @@ class Multi_menu {
 	        }
 	    }
 	    
-	    if (isset($nav_tag_opened)) {	    	
+	    if (isset($nav_tag_opened)) 
+	    {
+	    	if ( ! empty($this->_additional_item['last'])) {
+				$html .= $this->_additional_item['last'];
+			}
+
 	    	$html .= $this->nav_tag_close; 
 	    }
 	    else {	   
 	    	$html  .= $this->children_tag_close;
 	    }
+	}
+
+	/**
+	 * Inject item to menu
+	 * Call this method before render method call
+	 * 
+	 * @param  string $item     menu item that would be injected
+	 * @param  string $position position where the additiona menu item would be placed (fist or last)
+	 * @return Multi_menu           
+	 */
+	public function inject_item($item, $position = null)
+	{
+		if (empty($position)) {
+			$position = 'last';
+		}
+
+		$this->_additional_item[$position] = $item;
+
+		return $this;
 	}
 
 	/**

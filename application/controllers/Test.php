@@ -23,6 +23,11 @@ class Test extends CI_Controller {
 		$this->load->view("basic");
 	}
 
+	public function inject()
+	{
+		$this->load->view("inject");
+	}
+
 	public function bootstrap1()
 	{
 		$config["nav_tag_open"]          = '<ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">';		
