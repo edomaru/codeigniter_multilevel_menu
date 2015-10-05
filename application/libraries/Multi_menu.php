@@ -232,6 +232,13 @@ class Multi_menu {
 	 * @var string
 	 */
 	private $_additional_item        = array();
+
+	/**
+	 * Uri segment
+	 * 
+	 * @var int
+	 */
+	private $uri_segment             = 1;
 	
 
 	/**
@@ -242,8 +249,8 @@ class Multi_menu {
 	public function __construct($config = array())
 	{
 		// just in case url helper has not load yet
-		$ci =& get_instance();
-		$ci->load->helper('url');
+		$this->ci =& get_instance();
+		$this->ci->load->helper('url');
 
 		$this->initialize($config);
 	}
@@ -503,7 +510,9 @@ class Multi_menu {
 	 */
 	private function set_active($html, $slug)
 	{
-		if ($this->item_active != '' && $slug == $this->item_active) 
+		$segment = $this->ci->uri->segment($this->uri_segment);
+
+		if ( ($this->item_active != '' && $slug == $this->item_active && empty($segment)) || $slug == $segment) 
 		{
 			$doc = new DOMDocument();
 			$doc->loadHTML($html);
