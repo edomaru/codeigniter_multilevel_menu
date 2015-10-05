@@ -67,11 +67,12 @@ Codeigniter Multilevel Menu is a library that provide easy way to render multi l
 
 ### Example 1 - Basic
 
-This example show how to render multi level menu with active menu item **Item-0**
+This example show how to render multi level menu with __default__ active menu item **Item-0**
 
 ```php
 <?php echo $this->multi_menu->render('Item-0'); ?>
 ```
+
 
 #### Screenshoot
 ![alt text](https://github.com/edomaru/codeigniter_multilevel_menu/blob/master/assets/img/ci_multilevel_menu_screenshoot.jpg "Codeigniter Multi level menu screenshoot of Example 1 - Basic")
@@ -99,7 +100,7 @@ public function bootstrap1()
 
 <?php 
 // in view
-// Render multi menu with active item `Item-0` and menu items with separator `Item-3` and `Item-5`
+// Render multi menu with default active item `Item-0` and menu items with separator `Item-3` and `Item-5`
 echo $this->multi_menu->render('Item-0', array('Item-3', 'Item-5')); 
 ?>
 ```
